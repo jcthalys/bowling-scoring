@@ -1,21 +1,42 @@
 (ns bowling-scoring.core)
 
-;game
-;10 frames
-;strike? on the first try = 10 score sheet
-;spare?  = sum of firstest 2 is 10
-;
-
-{:score-card [{:score 17
-               :total 17}                                   ;strike? [10, 0 0] or [10 10 10]
-              {:score 12                                    ;non strike and non spare [5 7]
-               :total 29}
-              {:score 17
-               :total 46}]}                                 ;spare? [5, 5, 7]
-
 (defn strike? [rolls]
   (= 10 (first rolls)))
 
 (defn spare? [rolls]
   (and (<= 2 (count rolls))
        (= 10 (reduce + (take 2 rolls)))))
+
+(defn drop-previews-roll [rolls]
+  (if (or (strike? rolls)
+          (spare? rolls))
+    (drop 3 rolls)
+    (drop 2 rolls)))
+
+(defn group-frames [rolls]
+  (let [frame (if (or (strike? rolls)
+                     (spare? rolls))
+               (take 3 rolls)
+               (take 2 rolls))
+        score (reduce + frame)]
+    {:score score}))
+
+(defn sum-frames [rolls]
+  (loop [remains rolls
+         frames []]
+    (if (or (= 10 (count frames))
+            (= 0 (count remains)))
+      frames
+      (recur (drop-previews-roll remains)
+             (conj frames (group-frames remains))))))
+
+(defn scorecard [rolls]
+  (reduce (fn [acc score]
+            (let [{:keys [total]} (last acc)]
+              (->> ((fnil + 0) total
+                     (:score score))
+                   (assoc score :total)
+                   (conj acc))))
+          []
+          (sum-frames rolls)))
+
