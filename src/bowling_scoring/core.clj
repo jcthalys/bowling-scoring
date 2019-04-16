@@ -4,8 +4,7 @@
   (= 10 (first rolls)))
 
 (defn spare? [rolls]
-  (and (<= 2 (count rolls))
-       (= 10 (reduce + (take 2 rolls)))))
+  (= 10 (reduce + (take 2 rolls))))
 
 (defn drop-previews-roll [rolls]
   (if (or (strike? rolls)

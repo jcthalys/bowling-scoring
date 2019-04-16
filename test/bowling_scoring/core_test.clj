@@ -8,13 +8,15 @@
     (is (not (strike? [5 3])))))
 
 (deftest spare?-test
-
   (testing "test a spare roll"
     (is (spare? [5 5]))
     (is (spare? [8 2])))
 
   (testing "test a invalid spare roll"
-    (is (false? (spare? [5 3])))))
+    (is (false? (spare? [5 3]))))
+
+  (testing "test a invalid spare roll"
+    (is (false? (spare? [3])))))
 
 (deftest drop-previews-roll-test
   (testing "test drop previews spare frame rolls"
