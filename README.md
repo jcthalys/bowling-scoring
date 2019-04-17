@@ -5,7 +5,8 @@ A Clojure library designed to ... well, that part is up to you.
 ## Usage
 
 How do I solve the problem of bowling, I imagine creating a game that is all the rolls with the calculation of the score of each frame with their respective total score so far. I believe that follows the presented example and how the scores in the bowling usually come around.
-Any vector numbers can be passed to the function and will calculate the partial scores.
+
+Any vector numbers can be passed to the function and will calculate the partial scores and total until 10 frames. More than that will be ignored.
 
 ## License
 

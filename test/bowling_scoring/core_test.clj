@@ -96,4 +96,17 @@
             {:score 5, :total 138}
             {:score 17, :total 155}
             {:score 13, :total 168}]
-           (scorecard [10 10 0 7 10 7 2 5 5 10 10 10 10 10 10 2 5 5 5 2 3 6 4 7 7 3 3])))))
+           (scorecard [10 10 0 7 10 7 2 5 5 10 10 10 10 10 10 2 5 5 5 2 3 6 4 7 7 3 3]))))
+
+    (testing "score more than 10 frames"
+      (is (= [{:score 20, :total 20}
+              {:score 17, :total 37}
+              {:score 9, :total 46}
+              {:score 20, :total 66}
+              {:score 30, :total 96}
+              {:score 22, :total 118}
+              {:score 15, :total 133}
+              {:score 5, :total 138}
+              {:score 17, :total 155}
+              {:score 13, :total 168}]
+             (scorecard [10 10 0 7 10 7 2 5 5 10 10 10 10 10 10 2 5 5 5 2 3 6 4 7 7 3 3 10 10 10])))))
