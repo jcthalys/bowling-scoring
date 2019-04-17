@@ -19,17 +19,30 @@
     (is (false? (spare? [3])))))
 
 (deftest drop-previews-roll-test
-  (testing "test drop previews spare frame rolls"
+  (testing "drop previews spare frame rolls"
     (is (= [7 8 9]
           (drop-previews-roll [5 5 6 7 8 9]))))
 
-  (testing "test drop previews strike frame rolls"
+  (testing "drop previews strike frame rolls"
     (is (= [6 7 8 9]
            (drop-previews-roll [10 5 5 6 7 8 9]))))
 
-  (testing "test drop previews normal frame rolls"
+  (testing "drop previews normal frame rolls"
     (is (= [5 6 7 8 9]
            (drop-previews-roll [3 5 5 6 7 8 9])))))
+
+(deftest take-frame-test
+  (testing "take next spare frame rolls"
+    (is (= {:score 16}
+           (take-frame [5 5 6 7 8 9]))))
+
+  (testing "test next strike frame rolls"
+    (is (= {:score 20}
+           (take-frame [10 5 5 6 7 8 9]))))
+
+  (testing "test next simple frame rolls"
+    (is (= {:score 8}
+           (take-frame [3 5 5 6 7 8 9])))))
 
 (deftest sum-frames-test
   (testing "sum each score frame and build card"

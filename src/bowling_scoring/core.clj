@@ -12,7 +12,7 @@
     (drop 3 rolls)
     (drop 2 rolls)))
 
-(defn group-frames [rolls]
+(defn take-frame [rolls]
   (let [frame (if (or (strike? rolls)
                      (spare? rolls))
                (take 3 rolls)
@@ -27,7 +27,7 @@
             (= 0 (count remains)))
       frames
       (recur (drop-previews-roll remains)
-             (conj frames (group-frames remains))))))
+             (conj frames (take-frame remains))))))
 
 (defn scorecard [rolls]
   (reduce (fn [acc score]
